@@ -142,6 +142,7 @@ import (
 	"unsafe"
 )
 
+// Encrypts a string using XXTEA with a specified key.
 func Encrypt(text, key string) (out string, err error) {
 	ctext := C.char_to_unsigned_array(C.CString(text))
 	defer C.free(unsafe.Pointer(ctext))
@@ -153,6 +154,7 @@ func Encrypt(text, key string) (out string, err error) {
 	return
 }
 
+// Decrypts a string using XXTEA with a specified key.
 func Decrypt(text, key string) (out string, err error) {
 	ctext := C.char_to_unsigned_array(C.CString(text))
 	defer C.free(unsafe.Pointer(ctext))
