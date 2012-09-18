@@ -19,6 +19,9 @@ typedef unsigned int xxtea_long;
 #define XXTEA_MX (( (z >> 5) ^ (y << 2)) + ((y >> 3) ^ (z << 4))) ^ ((sum ^ y) + (k[(p & 3) ^ e] ^ z))
 #define XXTEA_DELTA 0x9e3779b9
 
+// Here lie functions to deal with Go's annoying complaints regarding converting between
+// Go strings and unsigned char *.
+
 unsigned char *char_to_unsigned_array(char *orig) {
   char *p = orig;
   while (p != '\0') {
@@ -36,6 +39,8 @@ char *unsigned_to_char_array(unsigned char *orig) {
   }
   return (char *) orig;
 }
+
+// XXTEA algorithm functions
 
 void xxtea_long_encrypt(xxtea_long *v, xxtea_long len, xxtea_long *k) {
     xxtea_long n = len - 1;
