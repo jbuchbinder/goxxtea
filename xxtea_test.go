@@ -11,26 +11,11 @@ func Test_XXTEA_Roundtrip(t *testing.T) {
 	key := "xxteaTEST"
 	orig := "01234567890123456789"
 
-	intermediate, _ := Encrypt(orig, key)
+	intermediate := Encrypt([]byte(orig), []byte(key))
 
-	decoded, _ := Decrypt(intermediate, key)
+	decoded := Decrypt(intermediate, []byte(key))
 
-	if decoded != orig {
-		t.Error("Round trip encode failed, result = " + decoded)
-	} else {
-		t.Log("Round trip xxtea encode passed")
-	}
-}
-
-func Test_XXTEA_Native_Roundtrip(t *testing.T) {
-	key := ([]byte)("xxteaTEST")
-	orig := ([]byte)("01234567890123456789")
-
-	intermediate, _ := XxteaEncrypt(orig, key)
-
-	decoded, _ := XxteaDecrypt(intermediate, key)
-
-	if string(decoded) != string(orig) {
+	if string(decoded) != orig {
 		t.Error("Round trip encode failed, result = " + string(decoded))
 	} else {
 		t.Log("Round trip xxtea encode passed")
